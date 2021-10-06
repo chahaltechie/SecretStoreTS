@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "name": "SecretStoreTS",
+  "type": "module",
+  "workspaces": [
+    "src/*"
+  ],
+  "scripts": {
+    "build": "lerna run build"
+  },
+  "dependencies": {
+    "tsc": "^2.0.3",
+    "typescript": "^4.3.5"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^16.9.4",
+    "lerna": "^4.0.0",
+    "@types/uuid": "^8.3.0",
+    "ts-node": "^10.0.0"
+  }
+}
