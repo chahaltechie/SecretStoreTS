@@ -13,6 +13,8 @@ export const awaitHandlerFactory = (middleware: RequestHandler) => {
     };
 };
 
+
+
 export abstract class ControllerBase<T extends UseCaseBase>
 {
     protected useCase:T;
@@ -26,9 +28,9 @@ export abstract class ControllerBase<T extends UseCaseBase>
     protected abstract processRequest(req: Request, res:Response, next:NextFunction ):Promise<void>;
 
     public getRequestHandler(): RequestHandler {
-        const validationMiddlewareHandler = awaitHandlerFactory(ValidationMiddleware(this.getReqDtoType()));
         const handler = this.processRequest.bind(this);
-        return  awaitHandlerFactory(validationMiddlewareHandler.bind(handler));
+        const validationMiddlewareHandler = awaitHandlerFactory(ValidationMiddleware(this.getReqDtoType(),handler));
+        return  awaitHandlerFactory(validationMiddlewareHandler);
     }
     
     protected ok<T>(res:Response,data?:T)

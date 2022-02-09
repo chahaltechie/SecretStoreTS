@@ -1,8 +1,9 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "experimentalDecorators": true,
     "target": "ES6",
-//    "rootDir": "../",
-//    "outDir": "../../dist"
+    "rootDir": "../",
+    "outDir": "../../dist"
   }
 }

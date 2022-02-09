@@ -1,8 +1,8 @@
-﻿import { Router, Response, Request, NextFunction } from "express";
+﻿import { Response, Request, NextFunction } from "express";
 import {validate} from "class-validator";
 import {plainToClass} from "class-transformer";
 
-const validationMw = (dtoClass: any) => {
+const validationMw = (dtoClass: any, handler: (req: Request, res: Response, next: NextFunction)=>Promise<void>) => {
     return function (req: Request, res: Response, next: NextFunction) {
         const output: any = plainToClass(dtoClass, req.body);
         validate(output, { skipMissingProperties: true }).then(errors => {
@@ -17,7 +17,7 @@ const validationMw = (dtoClass: any) => {
                 return;
             } else {
                 res.locals.input = output;
-                next();
+                handler(req,res,next);
             }
         });
     };
