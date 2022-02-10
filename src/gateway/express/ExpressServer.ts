@@ -3,13 +3,15 @@ import {Application, default as express} from "express";
 import SecretRouter from "./router/SecretRouter";
 import bodyParser from "body-parser";
 import IRouterBase from "./common/IRouterBase";
+import {injectable, inject} from "tsyringe";
 
+@injectable()
 export class ExpressServer {
     #appConfig: IAppConfig;
     #application: Application;
     #router: IRouterBase;
 
-    constructor(appConfig: IAppConfig, router: IRouterBase) {
+    constructor(@inject('IAppConfig') appConfig: IAppConfig,@inject('IRouterBase') router: IRouterBase) {
         this.#application = express();
         this.#router = router;
         this.#appConfig = appConfig;

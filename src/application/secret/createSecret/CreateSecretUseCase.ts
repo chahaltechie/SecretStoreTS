@@ -6,12 +6,14 @@ import {Secret} from "@secretstore/core/entity/secret";
 import {Importance} from "@secretstore/core/type/importance";
 import {ResponseBase} from "@secretstore/core/common/ResponseBase";
 import {CreateSecretInvalidRequest} from "./error/CreateSecretInvalidRequest";
+import {injectable, inject} from "tsyringe";
 
+@injectable()
 export class CreateSecretUseCase implements UseCaseBase<CreateSecretRequestDto,CreateSecretResponseDto>
 {
     private readonly secretRepository : ISecretRepository;
     
-    constructor(secretRepository : ISecretRepository) {
+    constructor(@inject('ISecretRepository') secretRepository : ISecretRepository) {
         this.secretRepository = secretRepository;
     }
     

@@ -2,12 +2,14 @@
 import {Router} from "express";
 import {CreateSecretController} from "../controller/secret/CreateSecretController";
 import validationMw from "../../common/middleware/ValidationMiddleware";
+import {injectable, inject, autoInjectable} from "tsyringe";
 
+@injectable()
 export default class SecretRouter implements IRouterBase
 {
     #createSecretController : CreateSecretController;
     readonly #router:Router;
-    constructor(createSecretController: CreateSecretController) {
+    constructor(@inject('CreateSecretController') createSecretController: CreateSecretController) {
         this.#createSecretController = createSecretController;
         
         this.#router = Router();
